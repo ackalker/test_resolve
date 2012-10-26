@@ -1,0 +1,15 @@
+#!/bin/sh
+
+node test_resolve_mymodule &
+
+for n in 1 2
+do
+  echo flip
+  sed -i 's/main\.js/index.js/g' node_modules/mymodule/package.json
+  sleep 3
+  echo flop
+  sed -i 's/index\.js/main.js/g' node_modules/mymodule/package.json
+  sleep 3
+done
+
+kill $!
